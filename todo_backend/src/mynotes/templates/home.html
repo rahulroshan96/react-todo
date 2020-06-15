@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<body>
+
+
+<main role="main">
+
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3">Welcome to MyNotes !</h1>
+    </div>
+  </div>
+  {% if user.is_authenticated %}
+  <div class="container">
+
+    <!-- Example row of columns -->
+    
+    <div class="row">
+      <div class="col-md-4">
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <a href="/notes/note" class="btn btn-lg btn-success btn-block">Create Notes</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <a href="/notes/share" class="btn btn-lg btn-primary btn-block">List Shared Notes</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+          <a href="/notes/list" class="btn btn-lg btn-info btn-block">List My Notes</a>
+        </div>
+      </div>
+    </div>
+
+    
+    {% endif %}
+  </div> <!-- /container -->
+{% endblock %}

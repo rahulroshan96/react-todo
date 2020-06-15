@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block body %}
+
+<div class="container">
+<div class="row" style="margin-top:20px">
+
+    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+      {% if msg %}
+		<div class="alert alert-danger">
+			<strong>{{ msg|escape }}</strong>
+		</div>
+		{% endif%}
+        <h2>Share Notes</h2>
+		<form role="form" method="post">
+          <table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Text</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for field in form %}
+    <tr>
+      <td>{{field.title}}</td>
+      <td>{{field.text}}</td>
+      <td>
+        <a href="/notes/delete?param={{field.id}}" class="btn btn-sm btn-danger btn-block">Delete</a>
+      </td>
+
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+			<fieldset>
+				<hr class="colorgraph">
+				<div class="row">
+					<div class="col-xs-6 col-sm-6 col-md-6">
+						<a href="/notes/note" class="btn btn-lg btn-success btn-block">Create Notes</a>
+					</div>
+					<div class="col-xs-6 col-sm-6 col-md-6">
+						<a href="/notes/share" class="btn btn-lg btn-primary btn-block">List Shared Notes</a>
+					</div>
+				</div>
+				<hr class="colorgraph">
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12">
+						<a href="/notes/list" class="btn btn-lg btn-info btn-block">List My Notes</a>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+
+</div>
+</div>
+{% endblock %}
+
