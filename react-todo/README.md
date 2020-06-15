@@ -1,7 +1,7 @@
 ### Introduction:
 
 A weekend project React-TODO, using ReactJS and Django.
-![Output sample](https://media.giphy.com/media/JPyqNTnJwzayqHFewl/giphy.gif)
+![Output sample](https://media.giphy.com/media/JPyqNTnJwzayqHFewl/giphy.gif =400x400)
 
 ### License:
 The MIT License (MIT)
