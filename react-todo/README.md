@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-![Output sample](https://giphy.com/gifs/JPyqNTnJwzayqHFewl/html5)
+![Output sample](https://media.giphy.com/media/JPyqNTnJwzayqHFewl/giphy.gif)
 
 ## Available Scripts
 
