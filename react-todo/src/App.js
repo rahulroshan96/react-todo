@@ -9,9 +9,9 @@ function App() {
     <Segment style={{ padding: '2em 0em' }} vertical>
     <Container textAlign='justified'>
     <Navbar/>
-    <Body/>
-    </Container>
-    </Segment>
+      <Body/>
+     </Container>
+     </Segment>
   );
 }
 

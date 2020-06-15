@@ -75,15 +75,19 @@ class  Body extends Component {
     onFormChange = e => this.setState({
         data: {...this.state.data, [e.target.name]: e.target.value }
     });
-    deleteTask(props){
-        console.log(props)
-        // fetch('http://localhost:8000/api/task-delete/'+props, {
-        //     method: 'DELETE',
-        //     })
-        //     .then(res => res.text()) // or res.json()
-        //     .then(data=>{
-        //         this.getTodoList()
-        //     });
+    deleteTask(id){
+        console.log(id)
+        var csrfToken = this.getCookie('csrftoken')
+        fetch(`http://localhost:8000/api/task-delete/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken':csrfToken,
+            },
+            })
+            .then((response)=>{
+                this.getTodoList()
+            });
     }
     render() {
         var tasks = this.state.taskList;
@@ -111,9 +115,10 @@ class  Body extends Component {
                         tasks.map((task, index)=>{
                             return (
                                 <div>
+                                    <span style={{float:'left'}}><Button onClick={() => this.deleteTask(task.id)}>Delete</Button></span>
                                     <List.Item key={index}>{task.title}</List.Item>
+                                    <br/>
                                     {/* to access this object we need to use arrow function in map function */}
-                                    <Button onClick={this.deleteTask(task.id)}>Delete</Button>
                                 </div> 
                             )
                         })
