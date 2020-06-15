@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-![Output sample](https://github.com/ajasmin/camstudio-mousedown-highlight/raw/master/android_vid_test.gif)
+![Output sample](https://giphy.com/gifs/JPyqNTnJwzayqHFewl/html5)
 
 ## Available Scripts
 
