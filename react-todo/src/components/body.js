@@ -20,6 +20,7 @@ class  Body extends Component {
         this.updateTask = this.updateTask.bind(this)
         this.onFormHandle = this.onFormHandle.bind(this)
         this.createNew = this.createNew.bind(this)
+        this.getTheToken = this.getTheToken.bind(this)
     }
 
     componentWillMount(props){
@@ -121,6 +122,23 @@ class  Body extends Component {
          ttext:task.detail
         }
     })
+    getTheToken(){
+        fetch(`http://localhost:8000/api/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: 'rahulxxxxyss',
+                password: 'aviuser123',
+            })})
+            .then(response => response.json())
+            .then((response)=>{
+                console.log(response.token)
+                localStorage.setItem('token', response.token)
+            });
+    }
+
     deleteTask(id){
         console.log(id)
         var csrfToken = this.getCookie('csrftoken')
@@ -147,6 +165,7 @@ class  Body extends Component {
         var tasks = this.state.taskList;
         return (
             <Container>
+                <Button onClick={this.getTheToken}>Click Here</Button>
                 <Segment>
                     <h3>New Task</h3>
                     <Form onSubmit={this.createTodoTask}> 
