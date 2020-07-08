@@ -1,12 +1,22 @@
 
 from django.conf.urls import url, include
 from django.contrib import admin
-from .views import apiOverview, \
-    task_list, task_detail, task_create, \
-    task_update, task_delete, register
+from .views import *
 from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
+
+    url(r'^get-group/(?P<pk>\w{0,50})', group_get, name='get-group'),
+    url(r'^group-update/(?P<pk>\w{0,50})', group_update, name='group-update'),
+    url(r'^group-delete/(?P<pk>\w{0,50})', group_delete, name='group-delete'),
+    url(r'^group-create/', group_create, name='group-create'),
+    url(r'^bill-create/', bill_create, name='bill-create'),
+    url(r'^bill-get/(?P<pk>\w{0,50})', bill_get, name='bill-get'),
+    url(r'^bill-update/(?P<pk>\w{0,50})', bill_update, name='bill-update'),
+    url(r'^bill-list/', bill_list, name='bill-list'),
+    url(r'^bill-delete/(?P<pk>\w{0,50})', bill_delete, name='bill-delete'),
+
+
     url(r'^task-list', task_list, name='task-list'),
     url(r'^task-detail/(?P<pk>\w{0,50})', task_detail, name='task-details'),
     url(r'^task-create', task_create, name='task-create'),

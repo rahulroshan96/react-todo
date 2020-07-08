@@ -3,8 +3,8 @@ from django.http import JsonResponse
 # Create your views here.
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import Task
-from .serializers import TaskSerializer, UserSerializer
+from .models import Task, Bill, Group, Split
+from .serializers import *
 
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -97,6 +97,87 @@ def register(request):
     else:
         data = serializer.errors
     return Response(data)
+
+
+########################################
+
+
+@api_view(['GET'])
+def group_get(request, pk):
+    group = Group.objects.get(id=int(pk))
+    serializer = GroupSerializer(group, many=False)
+    return Response(serializer.data)
+
+
+@api_view(['DELETE'])
+def group_delete(request, pk):
+    group = Group.objects.get(id=int(pk))
+    group.delete()
+    return Response("Group Deleted Successfully")
+
+@api_view(['POST'])
+def group_create(request):
+    serializer = GroupSerializer(request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    else:
+        return Response(serializer.errors)
+
+@api_view(['POST'])
+def group_update(request, pk):
+    group = Group.objects.get(id=pk)
+    serializer = GroupSerializer(instance=group, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    else:
+        return Response(serializer.errors)
+
+
+@api_view(['POST'])
+def bill_create(request):
+    serializer = BillSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    else:
+        return Response(serializer.errors)
+
+@api_view(['POST'])
+def bill_update(request, pk):
+    bill = Bill.objects.get(id=int(pk))
+    serializer = BillSerializer(instance=bill, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    else:
+        return Response(serializer.errors)
+
+
+@api_view(['GET'])
+def bill_get(request, pk):
+    bill = Bill.objects.get(id=int(pk))
+    serializer = BillSerializer(bill, many=False)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def bill_list(request):
+    bills = Bill.objects.all()
+    serializer = BillSerializer(bills, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['DELETE'])
+def bill_delete(request, pk=0):
+    bill = Bill.objects.get(id=int(pk))
+    for split in bill.splits.get_queryset():
+        split.delete()
+    bill.delete()
+    return Response("Bill Deleted Successfully")
+
+
+
 
 
 
