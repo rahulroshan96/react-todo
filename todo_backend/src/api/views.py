@@ -117,12 +117,25 @@ def group_delete(request, pk):
 
 @api_view(['POST'])
 def group_create(request):
-    serializer = GroupSerializer(request.data)
+    serializer = GroupSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data)
     else:
         return Response(serializer.errors)
+
+@api_view(['GET'])
+def groups_list(request):
+    groups = Group.objects.all()
+    serializers = GroupSerializer(groups, many=True)
+    return Response(serializers.data)
+
+@api_view(['GET'])
+def users_list(request):
+    users = User.objects.all()
+    serializers = UserSerializer(users, many=True)
+    return Response(serializers.data)
+
 
 @api_view(['POST'])
 def group_update(request, pk):
@@ -162,11 +175,10 @@ def bill_get(request, pk):
     return Response(serializer.data)
 
 @api_view(['GET'])
-def bill_list(request):
-    bills = Bill.objects.all()
+def bill_list(request, pk=0):
+    bills = Bill.objects.filter(group_name_id=int(pk))
     serializer = BillSerializer(bills, many=True)
     return Response(serializer.data)
-
 
 @api_view(['DELETE'])
 def bill_delete(request, pk=0):

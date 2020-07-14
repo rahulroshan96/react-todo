@@ -1,51 +1,50 @@
-import React, { Component } from 'react';
-import {Menu} from 'semantic-ui-react'
+import React, { Component } from 'react'
+import { Input, Menu, Button } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 class Navbar extends Component {
-    state = {}
+  state = { activeItem: 'home' }
 
-    handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
-    render() {
-        const { activeItem } = this.state
-    
-        return (
-          <Menu>
-            <Menu.Item
-              name='editorials'
-              active={activeItem === 'editorials'}
-              onClick={this.handleItemClick}
-            >
-              Home
-            </Menu.Item>
-    
-            <Menu.Item
-              name='reviews'
-              active={activeItem === 'reviews'}
-              onClick={this.handleItemClick}
-            >
-              Todo
-            </Menu.Item>
-    
-            <Menu.Item
-              name='upcomingEvents'
-              active={activeItem === 'upcomingEvents'}
-              onClick={this.handleItemClick}
-            >
-              Login
-            </Menu.Item>
-            <Menu.Item
-              name='upcomingEvents'
-              active={activeItem === 'upcomingEvents'}
-              onClick={this.handleItemClick}
-            >
-              SignUp
-            </Menu.Item>
+  render() {
+    const { activeItem } = this.state
 
-          </Menu>
-          
-        )
-      }
+    return (
+      <Menu secondary>
+        <Menu.Item
+          name='home'
+          active={activeItem === 'home'}
+          onClick={this.handleItemClick}
+        />
+        <Menu.Item
+          name='friends'
+          active={activeItem === 'friends'}
+          onClick={this.handleItemClick}
+        />
+        <Menu.Menu>
+        <Menu.Item>
+            <Link to='/login'><Button>Login</Button></Link>
+          </Menu.Item>
+        </Menu.Menu>
+        <Menu.Menu>
+          <Menu.Item>
+            <Link to='/register'><Button>Register</Button></Link>
+          </Menu.Item>
+        </Menu.Menu>
+        <Menu.Menu position='right'>
+          <Menu.Item>
+            <Input icon='search' placeholder='Search...' />
+          </Menu.Item>
+          <Menu.Item
+            name='Logout'
+            active={activeItem === 'logout'}
+            onClick={this.handleItemClick}
+          />
+        </Menu.Menu>
+      </Menu>
+    )
+  }
 }
 
-export default Navbar;          
+export default Navbar;
