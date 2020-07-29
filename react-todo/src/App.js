@@ -4,6 +4,8 @@ import {Segment, Container} from 'semantic-ui-react'
 import Navbar from './components/navbar'
 import {HashRouter as Router} from 'react-router-dom'
 import Splitwise from './components/Splitwise'
+import Example from './components/Example'
+
 
 
 function App() {
@@ -13,7 +15,8 @@ function App() {
     <Container textAlign='justified'>
         <Navbar/>
         <Segment>
-          <Splitwise/>
+          {/* <Splitwise/> */}
+          <Example/>
           {/* <Experiment/> */}
             {/* <Body/> */}
 

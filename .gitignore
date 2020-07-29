@@ -1,0 +1,5 @@
+node_modules/
+migrations/
+*.pyc
+db.sqlite3
+yarn.lock

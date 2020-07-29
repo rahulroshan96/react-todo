@@ -32,6 +32,7 @@ import CustomControls from "./IndexSections/CustomControls.js";
 import Menus from "./IndexSections/Menus.js";
 import Navbars from "./IndexSections/Navbars.js";
 import Tabs from "./IndexSections/Tabs.js";
+import NewTabs from "./IndexSections/NewTabs.js";
 import Progress from "./IndexSections/Progress.js";
 import Pagination from "./IndexSections/Pagination.js";
 import Pills from "./IndexSections/Pills.js";
@@ -45,8 +46,18 @@ import Carousel from "./IndexSections/Carousel.js";
 import Icons from "./IndexSections/Icons.js";
 import Login from "./IndexSections/Login.js";
 import Download from "./IndexSections/Download.js";
+import Groups from "./IndexSections/Groups.js";
+import Experiment from "./IndexSections/Experiment.js";
 
 class Index extends React.Component {
+
+  constructor(props){
+    super(props)
+    this.state = {
+      group:""
+    }
+  }
+
   componentDidMount() {
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
@@ -58,6 +69,11 @@ class Index extends React.Component {
         <DemoNavbar />
         <main ref="main">
           <Hero />
+          {/* <Experiment/> */}
+              <NewTabs/>
+          <Groups/>
+          
+
           <Buttons />
           <Inputs />
           <section className="section">

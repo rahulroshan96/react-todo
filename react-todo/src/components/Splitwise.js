@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Container, Label , Grid, Image, Segment, Button, List, Form, Menu} from 'semantic-ui-react';
+import { Container, Label , Grid, Image, Segment, Divider, Button, Header, Popup, List, Form, Menu} from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Multiselect } from 'multiselect-react-dropdown';
 import test from './css/splitwise.css'
-
+import Update_delete from './Update_delete'
 
 class Splitwise extends Component {
     constructor(props){
@@ -24,7 +24,11 @@ class Splitwise extends Component {
             currentBill:{
                 bill_name:"",
                 bill_id:""
+            },
+            update_group:{
+
             }
+
         }
         this.group = this.group.bind(this);
         this.getMenu = this.getMenu.bind(this);
@@ -42,6 +46,7 @@ class Splitwise extends Component {
         this.setGroups = this.setGroups.bind(this)
         this.itemFunc = this.itemFunc.bind(this)
         this.getBills = this.getBills.bind(this)
+        this.update_group = this.update_group.bind(this)
     }
 
     setUsers(data){
@@ -81,6 +86,7 @@ class Splitwise extends Component {
         })
     }
     getMenu(props){
+        console.log("Get menu called")
         if(this.state.activeItem===''){
             return (
                 <Container>
@@ -113,7 +119,6 @@ class Splitwise extends Component {
                     <Label>Billls List</Label>
                     <List divided relaxed>
                     {
-                        
                             this.state.bills.map((value, index)=>{
                                 return (
                                     <List.Item>
@@ -145,6 +150,10 @@ class Splitwise extends Component {
                     </List>
                 </Container>
             )
+        }
+        if(this.state.activeItem==='update_group'){
+            console.log("this is update")
+            return <Update_delete g_name={this.state.update_group.g_name} g_id={this.state.update_group.g_id}/>
         }
     }
     onSelect(selectedList, selectedItem){
@@ -250,10 +259,8 @@ class Splitwise extends Component {
         this.setState({
             activeItem:''
         })
-        console.log("Mount the users")
         this.getUsers()
         this.getGroups()
-        // this.getBills()
     }
 
     setActiveItemCreateGroup(prop){
@@ -280,7 +287,7 @@ class Splitwise extends Component {
     }
     group(props){
         var g_list = this.state.groupsList.map((value, index)=>{
-            return value.g_name
+            return value
         })
         return (
             <Container>
@@ -293,10 +300,21 @@ class Splitwise extends Component {
                             return(
                                 <div>
                                     <b>
-                                    <List.Item key={index} onClick={this.itemFunc(value)}>
-                                    <List.Icon name='globe' size='large' verticalAlign='middle'/>
-                                        {value}
-                                    </List.Item>
+                                    <Grid>
+                                        <Grid.Column centered divided width="6">
+                                        <List.Item key={index} onClick={this.itemFunc(value)}>
+                                        <List.Icon name='globe' size='large' verticalAlign='middle'/>
+                                            {value.g_name}
+                                        </List.Item>
+                                        </Grid.Column>
+                                        <Grid.Column centered divided width="4">
+                                            <Button.Group>
+                                                <Button onClick={this.update_group(value)}>Edit</Button>
+                                                <Button negative>Delete</Button>
+                                            </Button.Group>
+                                        </Grid.Column>
+                                    </Grid>
+                                    <Divider />
                                     </b>
                                 </div>
                             )
@@ -308,13 +326,19 @@ class Splitwise extends Component {
                 
         );
     }
+    update_group = value => e => {
+        this.setState({
+            activeItem:"update_group",
+            update_group:value
+        })
+    }
     render() {
         return (
             <Container>
                 <ToastContainer />
                 <Grid celled='internally'>
     <Grid.Row>
-      <Grid.Column width={4}>
+      <Grid.Column width={5}>
         {/* <Group/> */}
         {this.group()}
       </Grid.Column>

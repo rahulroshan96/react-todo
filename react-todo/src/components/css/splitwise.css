@@ -1,0 +1,3 @@
+.test:not(.nohover):hover {  
+    border: 1px solid red; 
+}

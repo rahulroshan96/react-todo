@@ -121,7 +121,7 @@ class Register extends React.Component {
                                 <i className="ni ni-email-83" />
                               </InputGroupText>
                             </InputGroupAddon>
-                            <Input placeholder="Email" type="email" />
+                            <Input placeholder="Name" type="text" />
                           </InputGroup>
                         </FormGroup>
                         <FormGroup>

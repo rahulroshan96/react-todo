@@ -180,6 +180,13 @@ def bill_list(request, pk=0):
     serializer = BillSerializer(bills, many=True)
     return Response(serializer.data)
 
+@api_view(['GET'])
+def bill_list_all(request):
+    bills = Bill.objects.all()
+    serializer = BillSerializer(bills, many=True)
+    return Response(serializer.data)
+
+
 @api_view(['DELETE'])
 def bill_delete(request, pk=0):
     bill = Bill.objects.get(id=int(pk))

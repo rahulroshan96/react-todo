@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'^bill-list/(?P<pk>\w{0,50})', bill_list, name='bill-list'),
     url(r'^bill-delete/(?P<pk>\w{0,50})', bill_delete, name='bill-delete'),
     url(r'^users-list/', users_list, name='users-list'),
+    url(r'^bill-list-all/', bill_list_all, name='bill-list-all'),
 
 
     url(r'^task-list', task_list, name='task-list'),
